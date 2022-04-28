@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(dsdcc_block.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(37cd804ed3abdcfb86c9dbc4c8f7ad91)                     */
+/* BINDTOOL_HEADER_FILE_HASH(0223719eee603bf8f153a0b6c4f091a8)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -33,10 +33,11 @@ void bind_dsdcc_block(py::module& m)
     using dsdcc_block    = gr::dsdcc::dsdcc_block;
 
 
-    py::class_<dsdcc_block, gr::block, gr::basic_block,
+    py::class_<dsdcc_block,
         std::shared_ptr<dsdcc_block>>(m, "dsdcc_block", D(dsdcc_block))
 
         .def(py::init(&dsdcc_block::make),
+           py::arg("foo"),
            D(dsdcc_block,make)
         )
         

@@ -19,9 +19,6 @@
  static const char *__doc_gr_dsdcc_dsdcc_block = R"doc()doc";
 
 
- static const char *__doc_gr_dsdcc_dsdcc_block_dsdcc_block = R"doc()doc";
-
-
  static const char *__doc_gr_dsdcc_dsdcc_block_make = R"doc()doc";
 
   
