@@ -14,9 +14,9 @@
 #include <gnuradio/attributes.h>
 
 #ifdef gnuradio_dsdcc_EXPORTS
-#define DSDCC_API __GR_ATTR_EXPORT
+#define GR_DSDCC_API __GR_ATTR_EXPORT
 #else
-#define DSDCC_API __GR_ATTR_IMPORT
+#define GR_DSDCC_API __GR_ATTR_IMPORT
 #endif
 
 #endif /* INCLUDED_DSDCC_API_H */

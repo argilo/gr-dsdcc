@@ -19,7 +19,7 @@ namespace dsdcc {
  * \ingroup dsdcc
  *
  */
-class DSDCC_API dsdcc_block : virtual public gr::block
+class GR_DSDCC_API dsdcc_block : virtual public gr::block
 {
 public:
     typedef std::shared_ptr<dsdcc_block> sptr;
