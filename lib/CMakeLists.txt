@@ -22,10 +22,14 @@ if(NOT dsdcc_sources)
 endif(NOT dsdcc_sources)
 
 add_library(gnuradio-dsdcc SHARED ${dsdcc_sources})
-target_link_libraries(gnuradio-dsdcc gnuradio::gnuradio-runtime)
+target_link_libraries(gnuradio-dsdcc
+    PUBLIC gnuradio::gnuradio-runtime
+    PRIVATE ${LIBDSDCC_LIBRARIES}
+  )
 target_include_directories(gnuradio-dsdcc
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>
+    PRIVATE ${LIBDSDCC_INCLUDE_DIRS}
   )
 set_target_properties(gnuradio-dsdcc PROPERTIES DEFINE_SYMBOL "gnuradio_dsdcc_EXPORTS")
 
