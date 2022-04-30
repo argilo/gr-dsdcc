@@ -34,13 +34,15 @@ void bind_dsdcc_block(py::module& m)
 
 
     py::class_<dsdcc_block,
+        gr::block,
+        gr::basic_block,
         std::shared_ptr<dsdcc_block>>(m, "dsdcc_block", D(dsdcc_block))
 
         .def(py::init(&dsdcc_block::make),
            py::arg("foo"),
            D(dsdcc_block,make)
         )
-        
+
 
 
 
@@ -50,11 +52,3 @@ void bind_dsdcc_block(py::module& m)
 
 
 }
-
-
-
-
-
-
-
-
