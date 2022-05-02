@@ -8,7 +8,9 @@
 #ifndef INCLUDED_DSDCC_DSDCC_BLOCK_IMPL_H
 #define INCLUDED_DSDCC_DSDCC_BLOCK_IMPL_H
 
+#include "dsdcc/dsd_decoder.h"
 #include <gnuradio/dsdcc/dsdcc_block.h>
+#include <queue>
 
 namespace gr {
 namespace dsdcc {
@@ -16,7 +18,9 @@ namespace dsdcc {
 class dsdcc_block_impl : public dsdcc_block
 {
 private:
-    // Nothing to declare in this block.
+    DSDcc::DSDDecoder dsdDecoder;
+    std::queue<short> queue1;
+    std::queue<short> queue2;
 
 public:
     dsdcc_block_impl(int foo);

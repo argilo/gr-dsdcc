@@ -11,9 +11,7 @@
 namespace gr {
 namespace dsdcc {
 
-#pragma message("set the following appropriately and remove this warning")
 using input_type = float;
-#pragma message("set the following appropriately and remove this warning")
 using output_type = float;
 dsdcc_block::sptr dsdcc_block::make(int foo)
 {
@@ -29,8 +27,9 @@ dsdcc_block_impl::dsdcc_block_impl(int foo)
                 gr::io_signature::make(
                     1 /* min inputs */, 1 /* max inputs */, sizeof(input_type)),
                 gr::io_signature::make(
-                    1 /* min outputs */, 1 /*max outputs */, sizeof(output_type)))
+                    2 /* min outputs */, 2 /*max outputs */, sizeof(output_type)))
 {
+    dsdDecoder.setQuiet();
 }
 
 /*
@@ -40,9 +39,7 @@ dsdcc_block_impl::~dsdcc_block_impl() {}
 
 void dsdcc_block_impl::forecast(int noutput_items, gr_vector_int& ninput_items_required)
 {
-#pragma message( \
-    "implement a forecast that fills in how many items on each input you need to produce noutput_items and remove this warning")
-    /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
+    ninput_items_required[0] = noutput_items * 6;
 }
 
 int dsdcc_block_impl::general_work(int noutput_items,
@@ -51,15 +48,51 @@ int dsdcc_block_impl::general_work(int noutput_items,
                                    gr_vector_void_star& output_items)
 {
     auto in = static_cast<const input_type*>(input_items[0]);
-    auto out = static_cast<output_type*>(output_items[0]);
+    auto out1 = static_cast<output_type*>(output_items[0]);
+    auto out2 = static_cast<output_type*>(output_items[1]);
 
-#pragma message("Implement the signal processing in your block and remove this warning")
-    // Do <+signal processing+>
-    // Tell runtime system how many input items we consumed on
-    // each input stream.
-    consume_each(noutput_items);
+    for (int i = 0; i < noutput_items * 6; i++) {
+        int nbAudioSamples1 = 0, nbAudioSamples2 = 0;
+        short *audioSamples1, *audioSamples2;
 
-    // Tell runtime system how many output items we produced.
+        auto sample = static_cast<short>(in[i] * 32768.0f);
+        dsdDecoder.run(sample);
+
+        audioSamples1 = dsdDecoder.getAudio1(nbAudioSamples1);
+        if (nbAudioSamples1 > 0) {
+            for (int i = 0; i < nbAudioSamples1; i++) {
+                queue1.push(audioSamples1[i]);
+            }
+            dsdDecoder.resetAudio1();
+        }
+
+        audioSamples2 = dsdDecoder.getAudio2(nbAudioSamples2);
+        if (nbAudioSamples2 > 0) {
+            for (int i = 0; i < nbAudioSamples2; i++) {
+                queue2.push(audioSamples2[i]);
+            }
+            dsdDecoder.resetAudio2();
+        }
+    }
+
+    consume(0, noutput_items * 6);
+
+    for (int i = 0; i < noutput_items; i++) {
+        if (!queue1.empty()) {
+            out1[i] = queue1.front() / 32768.0f;
+            queue1.pop();
+        } else {
+            out1[i] = 0;
+        }
+
+        if (!queue2.empty()) {
+            out2[i] = queue2.front() / 32768.0f;
+            queue2.pop();
+        } else {
+            out2[i] = 0;
+        }
+    }
+
     return noutput_items;
 }
 
