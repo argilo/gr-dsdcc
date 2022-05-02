@@ -7,6 +7,7 @@
 
 #include "dsdcc_block_impl.h"
 #include <gnuradio/io_signature.h>
+#include <cmath>
 
 namespace gr {
 namespace dsdcc {
@@ -55,7 +56,7 @@ int dsdcc_block_impl::general_work(int noutput_items,
         int nbAudioSamples1 = 0, nbAudioSamples2 = 0;
         short *audioSamples1, *audioSamples2;
 
-        auto sample = static_cast<short>(in[i] * 32768.0f);
+        auto sample = static_cast<short>(std::lround(in[i] * 32768.0f));
         dsdDecoder.run(sample);
 
         audioSamples1 = dsdDecoder.getAudio1(nbAudioSamples1);
