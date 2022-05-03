@@ -1,17 +1,18 @@
-title: The DSDCC OOT Module
-brief: Short description of gr-dsdcc
+title: gr-dsdcc
+brief: A GNU Radio wrapper for DSDcc (Digital Speech Decoder)
 tags: # Tags are arbitrary, but look at CGRAN what other authors are using
-  - sdr
+  - DMR
+  - D-STAR
+  - YSF
 author:
-  - Author Name <authors@email.address>
+  - Clayton Smith <argilo@gmail.com>
 copyright_owner:
-  - Copyright Owner 1
-license:
-gr_supported_version: # Put a comma separated list of supported GR versions here
-#repo: # Put the URL of the repository here, or leave blank for default
-#website: <module_website> # If you have a separate project website, put it here
-#icon: <icon_url> # Put a URL to a square image here that will be used as an icon on CGRAN
+  - Clayton Smith <argilo@gmail.com>
+license: GPLv3
+gr_supported_version: v3.10
+repo: https://github.com/argilo/gr-dsd.git
 ---
-A longer, multi-line description of gr-dsdcc.
-You may use some *basic* Markdown here.
-If left empty, it will try to find a README file instead.
+The goal of this project is to package DSDcc (Digital Speech Decoder) as
+a GNU Radio block, so that it can be easily used with software radio
+peripherals such as the Ettus Research USRP or RTL2832U-based USB TV
+tuners.
