@@ -23,7 +23,7 @@ private:
     std::queue<short> queue2;
 
 public:
-    dsdcc_block_impl(int foo);
+    dsdcc_block_impl(DSDDecodeMode mode);
     ~dsdcc_block_impl();
 
     // Where all the action really happens

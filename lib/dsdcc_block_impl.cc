@@ -14,16 +14,16 @@ namespace dsdcc {
 
 using input_type = float;
 using output_type = float;
-dsdcc_block::sptr dsdcc_block::make(int foo)
+dsdcc_block::sptr dsdcc_block::make(DSDDecodeMode mode)
 {
-    return gnuradio::make_block_sptr<dsdcc_block_impl>(foo);
+    return gnuradio::make_block_sptr<dsdcc_block_impl>(mode);
 }
 
 
 /*
  * The private constructor
  */
-dsdcc_block_impl::dsdcc_block_impl(int foo)
+dsdcc_block_impl::dsdcc_block_impl(DSDDecodeMode mode)
     : gr::block("dsdcc_block",
                 gr::io_signature::make(
                     1 /* min inputs */, 1 /* max inputs */, sizeof(input_type)),
@@ -31,6 +31,42 @@ dsdcc_block_impl::dsdcc_block_impl(int foo)
                     2 /* min outputs */, 2 /*max outputs */, sizeof(output_type)))
 {
     dsdDecoder.setQuiet();
+
+    switch (mode) {
+    case DSDDecodeAuto:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeAuto, true);
+        break;
+    case DSDDecodeNone:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeNone, true);
+        break;
+    case DSDDecodeP25P1:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeP25P1, true);
+        break;
+    case DSDDecodeDStar:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeDStar, true);
+        break;
+    case DSDDecodeNXDN48:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeNXDN48, true);
+        break;
+    case DSDDecodeNXDN96:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeNXDN96, true);
+        break;
+    case DSDDecodeProVoice:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeProVoice, true);
+        break;
+    case DSDDecodeDMR:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeDMR, true);
+        break;
+    case DSDDecodeX2TDMA:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeX2TDMA, true);
+        break;
+    case DSDDecodeDPMR:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeDPMR, true);
+        break;
+    case DSDDecodeYSF:
+        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeYSF, true);
+        break;
+    }
 }
 
 /*

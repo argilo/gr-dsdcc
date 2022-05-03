@@ -4,13 +4,20 @@ category: '[DSDcc]'
 
 templates:
   imports: from gnuradio import dsdcc
-  make: dsdcc.dsdcc_block(${foo})
+  make: dsdcc.dsdcc_block(${mode})
 
 parameters:
-- id: foo
-  label: Foo
-  dtype: int
-  default: 42
+- id: mode
+  label: Decode Mode
+  dtype: enum
+  options: [dsdcc.DSDDecodeAuto, dsdcc.DSDDecodeNone, dsdcc.DSDDecodeP25P1,
+      dsdcc.DSDDecodeDStar, dsdcc.DSDDecodeNXDN48, dsdcc.DSDDecodeNXDN96,
+      dsdcc.DSDDecodeProVoice, dsdcc.DSDDecodeDMR, dsdcc.DSDDecodeX2TDMA,
+      dsdcc.DSDDecodeDPMR, dsdcc.DSDDecodeYSF]
+  option_labels: [Auto-detect, None, P25 Phase 1,
+      D-STAR, NXDN48 (6.25 kHz), NXDN96 (12.5 kHz),
+      ProVoice, DMR/MOTOTRBO, X2-TDMA,
+      DPMR Tier 1 or 2 (6.25 kHz), YSF]
 
 inputs:
 - label: in

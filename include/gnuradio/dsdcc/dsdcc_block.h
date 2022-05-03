@@ -14,6 +14,21 @@
 namespace gr {
 namespace dsdcc {
 
+typedef enum {
+    DSDDecodeAuto,
+    DSDDecodeNone,
+    DSDDecodeP25P1,
+    DSDDecodeDStar,
+    DSDDecodeNXDN48,
+    DSDDecodeNXDN96,
+    DSDDecodeProVoice,
+    DSDDecodeDMR,
+    DSDDecodeX2TDMA,
+    DSDDecodeDPMR,
+    DSDDecodeYSF
+} DSDDecodeMode;
+
+
 /*!
  * \brief <+description of block+>
  * \ingroup dsdcc
@@ -32,7 +47,7 @@ public:
      * class. dsdcc::dsdcc_block::make is the public interface for
      * creating new instances.
      */
-    static sptr make(int foo);
+    static sptr make(DSDDecodeMode mode);
 };
 
 } // namespace dsdcc

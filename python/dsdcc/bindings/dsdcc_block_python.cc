@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(dsdcc_block.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(111aba1bf4c031f57de8351a07e80bb4)                     */
+/* BINDTOOL_HEADER_FILE_HASH(0826eda9718dae530649110af6e04c31)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -39,7 +39,7 @@ void bind_dsdcc_block(py::module& m)
         std::shared_ptr<dsdcc_block>>(m, "dsdcc_block", D(dsdcc_block))
 
         .def(py::init(&dsdcc_block::make),
-           py::arg("foo"),
+           py::arg("mode"),
            D(dsdcc_block,make)
         )
 
@@ -48,6 +48,22 @@ void bind_dsdcc_block(py::module& m)
 
         ;
 
+    py::enum_<::gr::dsdcc::DSDDecodeMode>(m,"dsd_decode_mode")
+        .value("DSDDecodeAuto", ::gr::dsdcc::DSDDecodeAuto) // 0
+        .value("DSDDecodeNone", ::gr::dsdcc::DSDDecodeNone) // 1
+        .value("DSDDecodeP25P1", ::gr::dsdcc::DSDDecodeP25P1) // 2
+        .value("DSDDecodeDStar", ::gr::dsdcc::DSDDecodeDStar) // 3
+        .value("DSDDecodeNXDN48", ::gr::dsdcc::DSDDecodeNXDN48) // 4
+        .value("DSDDecodeNXDN96", ::gr::dsdcc::DSDDecodeNXDN96) // 5
+        .value("DSDDecodeProVoice", ::gr::dsdcc::DSDDecodeProVoice) // 6
+        .value("DSDDecodeDMR", ::gr::dsdcc::DSDDecodeDMR) // 7
+        .value("DSDDecodeX2TDMA", ::gr::dsdcc::DSDDecodeX2TDMA) // 8
+        .value("DSDDecodeDPMR", ::gr::dsdcc::DSDDecodeDPMR) // 9
+        .value("DSDDecodeYSF", ::gr::dsdcc::DSDDecodeYSF) // 10
+        .export_values()
+    ;
+
+    py::implicitly_convertible<int, ::gr::dsdcc::DSDDecodeMode>();
 
 
 
