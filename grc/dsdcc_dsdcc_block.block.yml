@@ -10,14 +10,14 @@ parameters:
 - id: mode
   label: Decode Mode
   dtype: enum
-  options: [dsdcc.DSDDecodeAuto, dsdcc.DSDDecodeNone, dsdcc.DSDDecodeP25P1,
+  options: [dsdcc.DSDDecodeAuto, dsdcc.DSDDecodeP25P1,
       dsdcc.DSDDecodeDStar, dsdcc.DSDDecodeNXDN48, dsdcc.DSDDecodeNXDN96,
       dsdcc.DSDDecodeProVoice, dsdcc.DSDDecodeDMR, dsdcc.DSDDecodeX2TDMA,
-      dsdcc.DSDDecodeDPMR, dsdcc.DSDDecodeYSF]
-  option_labels: [Auto-detect, None, P25 Phase 1,
+      dsdcc.DSDDecodeDPMR, dsdcc.DSDDecodeYSF, dsdcc.DSDDecodeNone]
+  option_labels: [Auto-detect, P25 Phase 1,
       D-STAR, NXDN48 (6.25 kHz), NXDN96 (12.5 kHz),
       ProVoice, DMR/MOTOTRBO, X2-TDMA,
-      DPMR Tier 1 or 2 (6.25 kHz), YSF]
+      DPMR Tier 1 or 2 (6.25 kHz), YSF, None]
 
 inputs:
 - label: in
