@@ -24,11 +24,6 @@ Build instructions:
     sudo make install
     sudo ldconfig
 
-If your GNU Radio is installed in `/usr` (rather than `/usr/local`), then
-replace the first line above with:
-
-    cmake -DCMAKE_INSTALL_PREFIX=/usr ..
-
 After running the above commands, "DSDcc Block" should appear under the
 "DSDcc" category in GNU Radio Companion, and "dsdcc_block" will be available
 in the "dsdcc" Python package.
