@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: GPL-3.0
 #
 # GNU Radio Python Flow Graph
-# Title: DMR receiver
+# Title: DSDcc receiver
 # GNU Radio version: 3.10.9.2
 
 from PyQt5 import Qt
@@ -33,9 +33,9 @@ import sip
 class rtlsdr_rx(gr.top_block, Qt.QWidget):
 
     def __init__(self):
-        gr.top_block.__init__(self, "DMR receiver", catch_exceptions=True)
+        gr.top_block.__init__(self, "DSDcc receiver", catch_exceptions=True)
         Qt.QWidget.__init__(self)
-        self.setWindowTitle("DMR receiver")
+        self.setWindowTitle("DSDcc receiver")
         qtgui.util.check_set_qss()
         try:
             self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
@@ -239,8 +239,8 @@ class rtlsdr_rx(gr.top_block, Qt.QWidget):
         self.connect((self.analog_pwr_squelch_xx_0, 0), (self.analog_quadrature_demod_cf_0, 0))
         self.connect((self.analog_quadrature_demod_cf_0, 0), (self.dsdcc_dsdcc_block_0, 0))
         self.connect((self.analog_quadrature_demod_cf_0, 0), (self.qtgui_time_sink_x_0, 0))
-        self.connect((self.dsdcc_dsdcc_block_0, 0), (self.audio_sink_0, 0))
         self.connect((self.dsdcc_dsdcc_block_0, 1), (self.audio_sink_0, 1))
+        self.connect((self.dsdcc_dsdcc_block_0, 0), (self.audio_sink_0, 0))
         self.connect((self.freq_xlating_fft_filter_ccc_0, 0), (self.low_pass_filter_0, 0))
         self.connect((self.freq_xlating_fft_filter_ccc_0, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.low_pass_filter_0, 0), (self.analog_pwr_squelch_xx_0, 0))
