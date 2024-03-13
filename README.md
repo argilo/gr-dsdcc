@@ -28,6 +28,9 @@ After running the above commands, "DSDcc Block" should appear under the
 "DSDcc" category in GNU Radio Companion, and "dsdcc_block" will be available
 in the "dsdcc" Python package.
 
+The `examples/rtlsdr_rx.grc` flow graph demonstrates how to receive digital
+voice sigals using an RTL-SDR.
+
 The block expects 48000 samples per second input, and outputs sound at
 8000 samples per second.  The input should be FM-demodulated (for
 example, with GNU Radio's Quadrature Demod block) and should be between
