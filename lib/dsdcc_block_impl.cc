@@ -31,13 +31,11 @@ dsdcc_block_impl::dsdcc_block_impl(DSDDecodeMode mode)
                     2 /* min outputs */, 2 /*max outputs */, sizeof(output_type)))
 {
     dsdDecoder.setQuiet();
+    dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeNone, true);
 
     switch (mode) {
     case DSDDecodeAuto:
         dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeAuto, true);
-        break;
-    case DSDDecodeNone:
-        dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeNone, true);
         break;
     case DSDDecodeP25P1:
         dsdDecoder.setDecodeMode(DSDcc::DSDDecoder::DSDDecodeP25P1, true);
